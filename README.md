@@ -78,14 +78,140 @@ Los else y else if de un condicional deben ir en la misma línea que termina el 
 Entre el 'if' y el parentesis que abarca la condición debe haber un espacio.
 
 `./paso1_wordscounter.c:53:  Extra space before last semicolon. If this should be an empty statement, use {} instead.  [whitespace/semicolon] [5]`
-Se dejo un espacio innecesesario entre la línea de código y el ';'.
+Se dejó un espacio innecesesario entre la línea de código y el punto y coma final.
 
 ### b. Errores de generación del ejecutable
 
+`paso1_main.c:22:9: error: unknown type name 'wordscounter_t'`
+
+`paso1_main.c:23:9: error: implicit declaration of function 'wordscounter_create' [-Wimplicit-function-declaration]`
+
+`paso1_main.c:24:9: error: implicit declaration of function 'wordscounter_process' [-Wimplicit-function-declaration]`
+
+`paso1_main.c:25:24: error: implicit declaration of function 'wordscounter_get_words' [-Wimplicit-function-declaration]`
+
+`paso1_main.c:27:9: error: implicit declaration of function 'wordscounter_destroy' [-Wimplicit-function-declaration]`
+
+Todos estos errores son de compilación. En paso1_main.c se llama a funciones no definidas y se utiliza el tipo de dato 'wordscounter_t' que tampoco fue definido con anterioridad.
+
 ### c. Reporte de WARNINGS
+
+El sistema no reportó warnings. Esto se debe a que se le dio la instructiva al compilador `-Werror` para que todos los warnings se traten como errores.
 
 ## Paso 2
 
 ### a. Correciones realizadas
 
 Básicamente se corrigieron todos los errores de estilo dejando la funcionalidad intacta. El strcpy() fue reemplazado con memcpy().
+
+### b. Ejecución correcta de la verificación de normas de programación
+
+s
+
+### c. Errores de generación del ejecutable
+
+`paso2_wordscounter.h:7:5: error: unknown type name 'size_t'`
+
+`paso2_wordscounter.h:20:1: error: unknown type name 'size_t'`
+
+`paso2_wordscounter.h:25:49: error: unknown type name 'FILE'`
+
+Estos dos errores se deben a que no se declaro el tipo 'size_t' y 'FILE' en el programa. Son errores de compilación.
+
+`paso2_wordscounter.c:17:8: error: conflicting types for 'wordscounter_get_words'`
+
+`paso2_wordscounter.h:20:8: note: previous declaration of 'wordscounter_get_words' was here size_t wordscounter_get_words(wordscounter_t *self);`
+
+En este contexto asumo que este error se da porque no se definió de manera correcta wordscounter_get_words al no existir el tipo 'size_t' (por los errores anteriores).
+
+`paso2_wordscounter.c:30:25: error: implicit declaration of function 'malloc' [-Wimplicit-function-declaration]`
+
+`paso2_wordscounter.c:30:25: error: incompatible implicit declaration of built-in function 'malloc' [-Werror]`
+
+La función 'malloc' nunca fue declarada.
+
+Todos estos son errores de tiempo de compilación.
+
+## Paso 3
+
+### a. Cambios con respecto al paso 2
+
+Básicamente se incluyeron las librerías stdlib.h, string.h y stdio.h solucionando los errores del paso anterior.
+
+### b. Errores de generación del ejecutable
+
+`paso3_main.c:27: undefined reference to 'wordscounter_destroy'`
+
+La función 'wordscounter_destroy' fue declarada pero nunca fue definida.
+
+## Paso 4
+
+### a. Cambios con respecto al paso 3
+
+El único cambio es que se le definió una funcionalidad a función 'wordscounter_destroy' (en este caso no hace nada).
+
+### b. Ejecución de Valgrind en la prueba 'TDA'
+
+    ==00:00:00:00.585 3882== 344 bytes in 1 blocks are still reachable in loss record 1 of 2
+    ==00:00:00:00.585 3882==    at 0x402D17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+    ==00:00:00:00.585 3882==    by 0x409C279: __fopen_internal (iofopen.c:69)
+    ==00:00:00:00.585 3882==    by 0x409C33D: fopen@@GLIBC_2.1 (iofopen.c:97)
+    ==00:00:00:00.585 3882==    by 0x8048517: main (paso4_main.c:14)
+
+Este error hace referencia a que en la linea 14 de paso4_main.c se abre el archivo recibido por el programa pero nunca se lo cierra.
+
+    ==00:00:00:00.585 3882== 1,505 bytes in 215 blocks are definitely lost in loss record 2 of 2
+    ==00:00:00:00.585 3882==    at 0x402D17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+    ==00:00:00:00.585 3882==    by 0x8048685: wordscounter_next_state (paso4_wordscounter.c:35)
+    ==00:00:00:00.585 3882==    by 0x8048755: wordscounter_process (paso4_wordscounter.c:30)
+    ==00:00:00:00.585 3882==    by 0x8048535: main (paso4_main.c:24)
+
+La memoria que es pedida por el 'malloc' de la línea 35 de paso4_wordscounter.c nunca es liberada por el programa.
+
+### c. Ejecución de Valgrind en la prueba 'Long Filename'
+
+    *00:00:00:00.509 3843** memcpy_chk: buffer overflow detected: program terminated
+    ==00:00:00:00.509 3843==    at 0x402FD97: ??? (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+    ==00:00:00:00.509 3843==    by 0x40346EB: __memcpy_chk (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+    ==00:00:00:00.509 3843==    by 0x804850A: memcpy (string3.h:53)
+    ==00:00:00:00.509 3843==    by 0x804850A: main (paso4_main.c:13)
+
+Este error ocurre porque el programa utiliza en su función 'main' un buffer de 30 caracteres de largo para el nomnbre del archivo de entrada. En esta prueba se ingresa un archivo que tiene 33 caracteres de largo, superando el tamaño del buffer y haciendo que 'memcpy' lanze un error.
+
+### d. Uso de strncpy
+
+Strncpy sería una función más indicada para esta situación ya que se esta trabajando con strings. Sin embargo, lo lógico sería que el tamaño de caracteres a copiar sea definido por el tamaño del array de destino.
+La prueba si sólo se cambia la función memcpy por strncpy probablemente hubiera fallado de igual manera.
+
+### e. Segmentation fault y buffer overflow
+
+Segmentation fault es un error que sucede cuando un programa intenta acceder a una porción de memoria que no le pertence. El sistema operativo por seguridad termina el programa.
+Buffer overflow es un problema que sucede cuando se accede a una posición que sobrepasa los límites de cierta estructura. Por ejemplo, si declaro un array de 10 lugares y luego procedo a acceder a la posición 15. Probablemente no haya un segmentation fault ya que estoy accediendo a una posición de memoria que posee mi programa. Sin embargo, esta información probablemente pertenezca a otras partes del programa y su modificación puede conducir a errores de funcionamiento.
+
+## Paso 5
+
+### a. Correcciones con respecto al paso 4
+
+En el código se quitaron dos casos en los que se utilizaba memoria dinámica. En cambio esa información se almaceno simplemente dentro de variables en las funciones.
+
+### b. Pruebas 'Invalid File' y 'Single Word'
+
+La prueba 'Invalid File' falla ya que espera que el programa devuelva un 1 (ya que no se le entrego un archivo válido). El programa en este caso está devolviendo un 255. Esto sucede porque se determinó que en caso de error el programa devuelva -1. Probablemente al comparar errores se realiza un casteo a unsigned char llevando el -1 a 255. El SERCOM advierte de esta situación: `Se esperaba terminar con un código de retorno 1 pero se obtuvo 255.`.
+
+La prueba 'Single Word' falla ya que se espera que el programa devuelva 1, sin embargo está devolviendo 0. En el SERCOM se puede observar esto dentro de la pestaña de diferencias.
+
+### c. Hexdump
+
+### d. Ejecución con gdb
+
+## Paso 6
+
+### a. Correcciones con respecto al paso 3
+
+Se cambió el codigo de error de -1 a 1. Los caracterés demilitadores de palabras se movieron a un 'define'.
+Por otro lado, se modificó levemente la lógica del conteo de palabras dentro de 'wordscounter_next_state'. De esta manera, se le da la chance al programa de poder contar cuando solo hay una palabra. Anteriormente al llegar al end of file (EOF) esta función simplemente marcaba la finalización del texto mediante el estado 'STATE_FINISHED' sin aumentar el contador si hubo una palabra.
+
+### b. Entregas realizadas
+
+### c. Ejecución de la prueba 'Single Word' en forma local
+
