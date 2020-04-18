@@ -100,7 +100,7 @@ El sistema no reportó warnings. Esto se debe a que se le dio la instructiva al 
 
 ## Paso 2
 
-### a. Correciones realizadas
+### a. Correcciones con respecto al paso 1
 
 Básicamente se corrigieron todos los errores de estilo dejando la funcionalidad intacta. El strcpy() fue reemplazado con memcpy().
 
@@ -134,7 +134,7 @@ Todos estos son errores de tiempo de compilación.
 
 ## Paso 3
 
-### a. Cambios con respecto al paso 2
+### a. Correcciones con respecto al paso 2
 
 Básicamente se incluyeron las librerías stdlib.h, string.h y stdio.h solucionando los errores del paso anterior.
 
@@ -146,7 +146,7 @@ La función 'wordscounter_destroy' fue declarada pero nunca fue definida.
 
 ## Paso 4
 
-### a. Cambios con respecto al paso 3
+### a. Correcciones con respecto al paso 3
 
 El único cambio es que se le definió una funcionalidad a función 'wordscounter_destroy' (en este caso no hace nada).
 
