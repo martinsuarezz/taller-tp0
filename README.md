@@ -238,6 +238,7 @@ Por otro lado, se modificó levemente la lógica del conteo de palabras dentro d
 ### b. Entregas realizadas
 
 ![Entregas](https://github.com/martinsuarezz/taller-tp0/blob/master/img/paso6_b.png)
+La entrega del paso 5 aparece sobre la del paso 6 por un error de mi parte al subir los archivos.
 
 ### c. Ejecución de la prueba 'Single Word' en forma local
 
