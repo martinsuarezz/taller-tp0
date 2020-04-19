@@ -4,7 +4,9 @@
 
 ### a. Capturas de pantallas de ejecución del aplicativo
 
-s
+![Ejecucion](https://github.com/martinsuarezz/taller-tp0/blob/master/img/ejecucion1.png)
+
+![Ejecucion Valgrind](https://github.com/martinsuarezz/taller-tp0/blob/master/img/ejecucion_valgrind.png)
 
 ### b. Valgrind
 
@@ -51,6 +53,8 @@ El proceso de pipeline (utilizando el caracter |) se basa en redirigir la salida
 
 ### a. Problemas de estilo
 
+![Problemas de estilo](https://github.com/martinsuarezz/taller-tp0/blob/master/img/errores_estilo.png)
+
 `./paso1_main.c:12:  Almost always, snprintf is better than strcpy  [runtime/printf] [4]`
 sprintf tiene más funcionalidades que strcpy, además de tener que indicar el tamaño de caracteres a copiar evitando overflow del buffer.
 
@@ -82,6 +86,8 @@ Se dejó un espacio innecesesario entre la línea de código y el punto y coma f
 
 ### b. Errores de generación del ejecutable
 
+![Errores de generacion del ejecutable](https://github.com/martinsuarezz/taller-tp0/blob/master/img/errores_ejecucion.png)
+
 `paso1_main.c:22:9: error: unknown type name 'wordscounter_t'`
 
 `paso1_main.c:23:9: error: implicit declaration of function 'wordscounter_create' [-Wimplicit-function-declaration]`
@@ -106,7 +112,7 @@ Básicamente se corrigieron todos los errores de estilo dejando la funcionalidad
 
 ### b. Ejecución correcta de la verificación de normas de programación
 
-s
+![Errores de generacion del ejecutable](https://github.com/martinsuarezz/taller-tp0/blob/master/img/ejecucion_paso2.png)
 
 ### c. Errores de generación del ejecutable
 
