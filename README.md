@@ -112,9 +112,11 @@ Básicamente se corrigieron todos los errores de estilo dejando la funcionalidad
 
 ### b. Ejecución correcta de la verificación de normas de programación
 
-![Errores de generacion del ejecutable](https://github.com/martinsuarezz/taller-tp0/blob/master/img/ejecucion_paso2.png)
+![Correcta verificacion de estilo](https://github.com/martinsuarezz/taller-tp0/blob/master/img/ejecucion_paso2.png)
 
 ### c. Errores de generación del ejecutable
+
+![Errores de generacion del ejecutable](https://github.com/martinsuarezz/taller-tp0/blob/master/img/paso2_c.png)
 
 `paso2_wordscounter.h:7:5: error: unknown type name 'size_t'`
 
@@ -146,6 +148,8 @@ Básicamente se incluyeron las librerías stdlib.h, string.h y stdio.h soluciona
 
 ### b. Errores de generación del ejecutable
 
+![Errores de generacion del ejecutable](https://github.com/martinsuarezz/taller-tp0/blob/master/img/paso3_b.png)
+
 `paso3_main.c:27: undefined reference to 'wordscounter_destroy'`
 
 La función 'wordscounter_destroy' fue declarada pero nunca fue definida.
@@ -157,6 +161,8 @@ La función 'wordscounter_destroy' fue declarada pero nunca fue definida.
 El único cambio es que se le definió una funcionalidad a función 'wordscounter_destroy' (en este caso no hace nada).
 
 ### b. Ejecución de Valgrind en la prueba 'TDA'
+
+![Valgrind TDA](https://github.com/martinsuarezz/taller-tp0/blob/master/img/paso4_b.png)
 
     ==00:00:00:00.585 3882== 344 bytes in 1 blocks are still reachable in loss record 1 of 2
     ==00:00:00:00.585 3882==    at 0x402D17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
@@ -175,6 +181,8 @@ Este error hace referencia a que en la linea 14 de paso4_main.c se abre el archi
 La memoria que es pedida por el 'malloc' de la línea 35 de paso4_wordscounter.c nunca es liberada por el programa.
 
 ### c. Ejecución de Valgrind en la prueba 'Long Filename'
+
+![Valgrind Long Filename](https://github.com/martinsuarezz/taller-tp0/blob/master/img/paso4_c.png)
 
     *00:00:00:00.509 3843** memcpy_chk: buffer overflow detected: program terminated
     ==00:00:00:00.509 3843==    at 0x402FD97: ??? (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
@@ -208,7 +216,11 @@ La prueba 'Single Word' falla ya que se espera que el programa devuelva 1, sin e
 
 ### c. Hexdump
 
+![Hexdump](https://github.com/martinsuarezz/taller-tp0/blob/master/img/paso5_c.png)
+
 ### d. Ejecución con gdb
+
+![gdb](https://github.com/martinsuarezz/taller-tp0/blob/master/img/paso5_d.png)
 
 ## Paso 6
 
@@ -219,5 +231,8 @@ Por otro lado, se modificó levemente la lógica del conteo de palabras dentro d
 
 ### b. Entregas realizadas
 
+![Entregas](https://github.com/martinsuarezz/taller-tp0/blob/master/img/paso6_b.png)
+
 ### c. Ejecución de la prueba 'Single Word' en forma local
 
+![Ejecucion Single Word](https://github.com/martinsuarezz/taller-tp0/blob/master/img/paso6_c.png)
