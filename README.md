@@ -210,17 +210,25 @@ En el código se quitaron dos casos en los que se utilizaba memoria dinámica. E
 
 ### b. Pruebas 'Invalid File' y 'Single Word'
 
+![Pruebas paso 5](https://github.com/martinsuarezz/taller-tp0/blob/master/img/paso5_b.png)
+
 La prueba 'Invalid File' falla ya que espera que el programa devuelva un 1 (ya que no se le entrego un archivo válido). El programa en este caso está devolviendo un 255. Esto sucede porque se determinó que en caso de error el programa devuelva -1. Probablemente al comparar errores se realiza un casteo a unsigned char llevando el -1 a 255. El SERCOM advierte de esta situación: `Se esperaba terminar con un código de retorno 1 pero se obtuvo 255.`.
 
 La prueba 'Single Word' falla ya que se espera que el programa devuelva 1, sin embargo está devolviendo 0. En el SERCOM se puede observar esto dentro de la pestaña de diferencias.
+
+![Diferencias](https://github.com/martinsuarezz/taller-tp0/blob/master/img/paso5_b2.png)
 
 ### c. Hexdump
 
 ![Hexdump](https://github.com/martinsuarezz/taller-tp0/blob/master/img/paso5_c.png)
 
+El último caracter del archivo input_single_word.txt es la letra 'd' correspondiente a 0x64 en código ASCII como se puede ver en el hexdump.
+
 ### d. Ejecución con gdb
 
 ![gdb](https://github.com/martinsuarezz/taller-tp0/blob/master/img/paso5_d.png)
+
+El debugger no se detuvo en el breakpoint de la línea 45 ya que el programa nunca ejecutó esa línea de código.
 
 ## Paso 6
 
