@@ -130,15 +130,13 @@ Estos dos errores se deben a que no se declaro el tipo 'size_t' y 'FILE' en el p
 
 `paso2_wordscounter.h:20:8: note: previous declaration of 'wordscounter_get_words' was here size_t wordscounter_get_words(wordscounter_t *self);`
 
-En este contexto asumo que este error se da porque no se definió de manera correcta wordscounter_get_words al no existir el tipo 'size_t' (por los errores anteriores).
+En este contexto asumo que este error se da porque no se definió de manera correcta wordscounter_get_words al no existir el tipo 'size_t' (por los errores anteriores). Son errores de compilación.
 
 `paso2_wordscounter.c:30:25: error: implicit declaration of function 'malloc' [-Wimplicit-function-declaration]`
 
 `paso2_wordscounter.c:30:25: error: incompatible implicit declaration of built-in function 'malloc' [-Werror]`
 
-La función 'malloc' nunca fue declarada.
-
-Todos estos son errores de tiempo de compilación.
+La función 'malloc' nunca fue declarada. También es un error de compilación.
 
 ## Paso 3
 
@@ -152,7 +150,7 @@ Básicamente se incluyeron las librerías stdlib.h, string.h y stdio.h soluciona
 
 `paso3_main.c:27: undefined reference to 'wordscounter_destroy'`
 
-La función 'wordscounter_destroy' fue declarada pero nunca fue definida.
+Este un error del linker. La función wordscounter_destroy fue declarada en paso3_wordscounter.h pero nunca es definida.
 
 ## Paso 4
 
