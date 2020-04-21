@@ -1,10 +1,10 @@
 # Informe TP0
 
-Martín Andrés Suarez
+Martín Andrés Suarez |
 
 -----------
-Padrón: 101.540
-Repositorio: `https://github.com/martinsuarezz/taller-tp0`
+Padrón: 101.540 |
+Repositorio: `https://github.com/martinsuarezz/taller-tp0` |
 
 ## Paso 0
 
