@@ -1,5 +1,13 @@
 # Informe TP0
 
+**Martín Andrés Suarez**
+
+**Padrón: 101.540**
+
+**Repositorio: `https://github.com/martinsuarezz/taller-tp0`**
+
+--------------
+
 ## Paso 0
 
 ### a. Capturas de pantallas de ejecución del aplicativo
