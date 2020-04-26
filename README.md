@@ -1,5 +1,9 @@
 # Informe TP0
-
+<!--  
+Sugerencia: El markdown podría respetar la regla de 80 caracteres de ancho
+máximo, de esta forma sería mas sencillo poder marcar los errores que haya
+en el informe de tps posteriores.
+-->
 **Martín Andrés Suarez**
 
 **Padrón: 101.540**
@@ -26,7 +30,9 @@ Algunos comandos típicos son:
 * `--track-origins=yes`: ayuda a obtener información sobre variables a las cuales no se les asignó un valor y luego se utilizan en el programa.
 
 ### c. sizeof()
-
+<!--
+    También depende del compilador.
+-->
 El operador sizeof() en C y C++ devuelve un entero positivo que representa el tamaño del tipo de datos que se le pasa. Por convención sizeof(char) siempre devuelve 1. Por otro lado, sizeof(int) como cualquier otro sizeof() puede devolver cualquier número ya que depende totalmente de la arquitectura del procesador. Generalmente, en un procesador de 32 bits, un entero se representa con 4 bytes por lo que sizeof(int) devolvería 4.
 
 ### d. sizeof() con structs
@@ -105,7 +111,9 @@ Se dejó un espacio innecesesario entre la línea de código y el punto y coma f
 `paso1_main.c:25:24: error: implicit declaration of function 'wordscounter_get_words' [-Wimplicit-function-declaration]`
 
 `paso1_main.c:27:9: error: implicit declaration of function 'wordscounter_destroy' [-Wimplicit-function-declaration]`
-
+<!--
+    Funciones y tipo de datos no declarados.
+-->
 Todos estos errores son de compilación. En paso1_main.c se llama a funciones no definidas y se utiliza el tipo de dato 'wordscounter_t' que tampoco fue definido con anterioridad.
 
 ### c. Reporte de WARNINGS
@@ -137,7 +145,13 @@ Estos dos errores se deben a que no se declaro el tipo 'size_t' y 'FILE' en el p
 `paso2_wordscounter.c:17:8: error: conflicting types for 'wordscounter_get_words'`
 
 `paso2_wordscounter.h:20:8: note: previous declaration of 'wordscounter_get_words' was here size_t wordscounter_get_words(wordscounter_t *self);`
-
+<!-- 
+    No se declaró correctamente*. Y si, el problema está en que en el .h no se
+    hizo el include que declara el tipo `size_t`, por lo que el compilador
+    entiende (de manera default) que el retorno de la función
+    wordscounter_get_words devuelve un int. Esto entra en conflicto
+    con la firma del .c, donde ya se declaró el tipo size_t.
+-->
 En este contexto asumo que este error se da porque no se definió de manera correcta wordscounter_get_words al no existir el tipo 'size_t' (por los errores anteriores). Son errores de compilación.
 
 `paso2_wordscounter.c:30:25: error: implicit declaration of function 'malloc' [-Wimplicit-function-declaration]`
